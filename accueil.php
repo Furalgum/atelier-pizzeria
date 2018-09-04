@@ -9,10 +9,7 @@
 <body>
 
 	<?php
-		$mysqli = new mysqli("localhost:3306", "root", "", "pizzeria");
-		if ($mysqli->connect_errno) {
-		echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		}
+		include_once connecBDD.php;
 	?>
    <h1>Pizzas</h1>
    <a href="gestionClients.php">Gestion des clients</a>

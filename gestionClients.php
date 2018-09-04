@@ -7,12 +7,10 @@
    <title>Accueil</title>
 </head>
 <body>
-	
+
 	<?php
-		$mysqli = new mysqli("localhost:3306", "root", "", "pizzeria");
-		if ($mysqli->connect_errno) {
-			echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		} 
+		require_once __DIR__ .'/connecBDD.php';
+		$pdo=ConnectToBDD();
 	?>
 	
 	<h1>Gestion des clients</h1>
@@ -30,11 +28,11 @@
 			<th align=center>Age</th>
 		</tr>
 	<?php
-		$res = $mysqli->query("SELECT * FROM client");
-		while ($row = $res->fetch_assoc()) {
+		$stmt = $pdo->prepare("SELECT * FROM client");
+		$stmt->execute(); 
+		while ($row = $stmt->fetch()) {
 	?>
 		<tr>
-			
 			<td align=center><?php echo $row["id"]; ?></td>
 			<td align=center><?php echo $row["nom"]; ?></td>
 			<td align=center><?php echo $row["prenom"]; ?></td>

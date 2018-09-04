@@ -7,38 +7,56 @@
    <title>Accueil</title>
 </head>
 <body>
-
-	<?php
-		$mysqli = new mysqli("localhost:3306", "root", "", "pizzeria");
-		if ($mysqli->connect_errno) {
-			echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		}
-	?>
 	
 	<h1>Gestion des clients</h1>
 	
 	<h2>Création d'un client</h2>
 	
-	<form action="" method="get" >
-		<div>
-			<label for="nom">Nom</label>
-			<input type="text" name="nom" id="nom" required>
-		</div>
-		<div>
-			<label for="prenom">Prénom</label>
-			<input type="text" name="prenom" id="prenom" required>
-		</div>
-		<div>
-			<label for="ville">Ville</label>
-			<input type="text" name="ville" id="ville" required>
-		</div>
-		<div>
-			<label for="age">Age</label>
-			<input type="text" name="age" id="age" required>
-		</div>
-		<div>
-			<input type="submit" value="Ajouter">
-		</div>
+	<form action="" method="post" >
+		<table>
+			<tr>
+				<th><label for="nom">Nom</label></th>
+				<td><input type="text" name="nom" id="nom" required></td>
+			</tr>
+			<tr>
+				<th><label for="prenom">Prénom</label></th>
+				<td><input type="text" name="prenom" id="prenom" required></td>
+			</tr>
+			<tr>
+				<th><label for="ville">Ville</label></th>
+				<td><input type="text" name="ville" id="ville" required></td>
+			</tr>
+			</tr>
+				<th><label for="age">Age</label></th>
+				<td><input type="text" name="age" id="age" required><td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="ajouter" value="Ajouter"></td>
+			</tr>
+		</table>
 	</form>
+	
+	<?php
+		require_once __DIR__ .'/connecBDD.php';
+		
+		if(isset ($_POST['ajouter'])){
+			$nom=$_POST['nom'];
+			$prenom=$_POST['prenom'];
+			$ville=$_POST['ville'];
+			$age=$_POST['age'];
+			$sql='INSERT INTO client(nom,prenom,ville,age) VALUES(:nom,:prenom,:ville,:age)';
+			$pdo = ConnectToBDD();
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute([
+				'nom' => $nom,
+				'prenom' => $prenom,
+				'age' => $age,
+				'ville' => $ville
+			]);
+		}
+		
+		
+	?>
+	
 </body>
 </html>
