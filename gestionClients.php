@@ -7,18 +7,21 @@
    <title>Accueil</title>
 </head>
 <body>
-
-	<h1>Gestion des clients</h1>
-   <a href="accueil.php">Retour à l'accueil</a>
-   
-   <?php
-       $mysqli = new mysqli("localhost:3306", "root", "", "pizzeria");
-       if ($mysqli->connect_errno) {
-          echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-       } 
-   ?>
 	
-	<center><table width=60%>
+	<?php
+		$mysqli = new mysqli("localhost:3306", "root", "", "pizzeria");
+		if ($mysqli->connect_errno) {
+			echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+		} 
+	?>
+	
+	<h1>Gestion des clients</h1>
+	
+	<a href="ajoutClient.php">Ajout</a>/<a href="accueil.php">Retour à l'accueil</a>
+	
+	<h2>Liste des clients</h2>
+	
+	<table width=60%>
 		<tr>
 			<th align=center>Id.</th>
 			<th align=center>Nom</th>
@@ -37,11 +40,13 @@
 			<td align=center><?php echo $row["prenom"]; ?></td>
 			<td align=center><?php echo $row["ville"]; ?></td>
 			<td align=center><?php echo $row["age"]; ?></td>
+			<td align=center>Modifier</td>
+			<td align=center>Supprimer</td>
 		</tr>	
 		<?php
 		}
 		?>
-	</table></center>
+	</table>
 
 </body>
 </html>
