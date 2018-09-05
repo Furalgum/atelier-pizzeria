@@ -9,7 +9,7 @@
 <body>
 
 	<?php
-		include_once connecBDD.php;
+		require_once __DIR__ .'/connecBDD.php';
 	?>
    <h1>Pizzas</h1>
    <a href="gestionClients.php">Gestion des clients</a>
